@@ -20,7 +20,7 @@ const Sidebar = () => {
       <div>
         <div className="px-6 py-4 text-center">
           <h1 className="text-2xl scale-x-110 tracking-tighter">
-            <span className="text-customGreen">INSUR</span>
+            <span className="text-primary">INSUR</span>
             <span className="text-white">GENT</span>
           </h1>
         </div>
