@@ -5,7 +5,7 @@ import Sidebar from "./shared/container/Sidebar/Sidebar";
 export const App = () => {
   return (
     <Router>
-      <div className="flex gap-5">
+      <div className="flex gap-5 text-base">
         <Sidebar />
         <Routes>
           <Route path="/dashboard" element={<AddClient />} />
