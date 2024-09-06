@@ -2,7 +2,7 @@ import {
   IconCheck,
   IconCircle,
   IconCircle1,
-  IconUser,
+  IconDotsCircleHorizontal,
 } from "@tabler/icons-react";
 import React, { useState } from "react";
 import { twMerge } from "tailwind-merge";
@@ -15,7 +15,11 @@ type Tab = {
 
 const tabs: Tab[] = [
   { id: 1, label: "Basic Info", icon: <IconCheck /> },
-  { id: 2, label: "Insurance", icon: <IconUser /> },
+  {
+    id: 2,
+    label: "Insurance",
+    icon: <IconDotsCircleHorizontal />,
+  },
   { id: 3, label: "Financials", icon: <IconCircle /> },
   { id: 4, label: "Relationship Management", icon: <IconCircle1 /> },
   { id: 5, label: "Insurance Quotes", icon: <IconCircle /> },
@@ -27,9 +31,9 @@ export const Tab = () => {
   const [activeTab, setActiveTab] = useState(2);
 
   return (
-    <div className="flex flex-col gap-5">
-      <div className="px-4 py-2 relative h-[100px] w-full overflow-x-scroll">
-        <div className="absolute flex w-max overflow-x-scroll border-b border-gray-300 ">
+    <div className="flex flex-col gap-1">
+      <div className="px-2 py-2 relative h-[70px] w-full overflow-x-scroll ">
+        <div className="absolute flex w-max overflow-x-scroll border-b border-gray-300 group">
           {tabs.map((tab) => (
             <button
               key={tab.id}
@@ -37,7 +41,7 @@ export const Tab = () => {
               className={twMerge(
                 "flex items-center px-4 py-2 text-gray-500 hover:text-gray-900 transition-all",
                 activeTab === tab.id &&
-                  "text-green-600 font-semibold border-b-2 border-green-500"
+                  "text-green-600 font-semibold border-b-2 border-green-500 hover:text-green-600"
               )}
             >
               <span className="mr-2">{tab.icon}</span>
@@ -46,7 +50,7 @@ export const Tab = () => {
           ))}
         </div>
       </div>
-      <div className="mt-4">
+      <div className=" bg-white border border-gray-200 p-2 rounded-lg">
         {tabs.map(
           (tab) =>
             activeTab === tab.id && (

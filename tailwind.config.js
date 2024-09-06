@@ -7,6 +7,7 @@ export default {
       colors: {
         primary: "#29A87E",
         dark: "#091214",
+        shade: "#F3F8F8",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
