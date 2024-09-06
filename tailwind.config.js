@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         primary: "#29A87E",
-        customDark: "#091214",
+        dark: "#091214",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
