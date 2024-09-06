@@ -27,24 +27,25 @@ export const Tab = () => {
   const [activeTab, setActiveTab] = useState(2);
 
   return (
-    <div className="bg-gray-50 px-4 py-2">
-      <div className="inline-flex border-b border-gray-300">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={twMerge(
-              "flex items-center px-4 py-2 text-gray-500 hover:text-gray-900 transition-all",
-              activeTab === tab.id &&
-                "text-green-600 font-semibold border-b-2 border-green-500"
-            )}
-          >
-            <span className="mr-2">{tab.icon}</span>
-            <span>{tab.label}</span>
-          </button>
-        ))}
+    <div className="flex flex-col gap-5">
+      <div className="px-4 py-2 relative h-[100px] w-full overflow-x-scroll">
+        <div className="absolute flex w-max overflow-x-scroll border-b border-gray-300 ">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={twMerge(
+                "flex items-center px-4 py-2 text-gray-500 hover:text-gray-900 transition-all",
+                activeTab === tab.id &&
+                  "text-green-600 font-semibold border-b-2 border-green-500"
+              )}
+            >
+              <span className="mr-2">{tab.icon}</span>
+              <span>{tab.label}</span>
+            </button>
+          ))}
+        </div>
       </div>
-
       <div className="mt-4">
         {tabs.map(
           (tab) =>
