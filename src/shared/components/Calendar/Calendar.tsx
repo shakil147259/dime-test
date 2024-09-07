@@ -14,6 +14,7 @@ export const Calendar = ({ inputUI }: CalendarProps) => {
   const styles = getStyles();
   return (
     <DatePicker
+      wrapperClassName="w-full relative"
       showMonthDropdown
       showYearDropdown
       dropdownMode="select"
