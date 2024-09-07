@@ -4,7 +4,7 @@ import {
   Input,
   Label,
   Select,
-} from "../../../../shared/components";
+} from "../../../../../shared/components";
 import { IconCalendarMonth } from "@tabler/icons-react";
 
 export const BasicInfo = () => {
