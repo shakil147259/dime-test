@@ -7,6 +7,7 @@ import {
 import { TabItemsShape } from "../../../../shared/components/Tab/utils/types";
 import {
   BasicInfo,
+  Compliance,
   Financials,
   Insurance,
   InsuranceQuotes,
@@ -36,5 +37,10 @@ export const tabItems: TabItemsShape[] = [
     content: <InsuranceQuotes />,
   },
   { id: 6, label: "Marketing", icon: <IconCircle />, content: <Marketing /> },
-  { id: 7, label: "Legal and Compliance", icon: <IconCircle /> },
+  {
+    id: 7,
+    label: "Legal and Compliance",
+    icon: <IconCircle />,
+    content: <Compliance />,
+  },
 ];
