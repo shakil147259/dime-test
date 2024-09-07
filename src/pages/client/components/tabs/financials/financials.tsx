@@ -8,7 +8,7 @@ import {
 import { ReactNode, useState } from "react";
 import { IncomeSourceInfo } from "./components/incomeSourceInfo";
 import { uniqueKey } from "../../../../../utils";
-import InfoBox from "./components/infoBox";
+import InfoBox from "../common/infoBox";
 import { AssetsInfo } from "./components/assetsInfo";
 import { DebtsInfo } from "./components/debtsInfo";
 

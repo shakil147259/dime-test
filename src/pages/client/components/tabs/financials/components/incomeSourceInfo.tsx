@@ -1,18 +1,13 @@
 import { IconMinus } from "@tabler/icons-react";
 import { Input } from "../../../../../../shared/components";
 import { uniqueKey } from "../../../../../../utils";
-
-interface IncomeSourceInfoProps {
-  index: number;
-  remove: (index: number) => void;
-  itemKey?: string | number;
-}
+import { RemovableInfoProps } from "../../common/interface";
 
 export const IncomeSourceInfo = ({
   index = 1,
   remove,
   itemKey,
-}: IncomeSourceInfoProps) => {
+}: RemovableInfoProps) => {
   return (
     <div
       className="flex flex-row items-center gap-3"

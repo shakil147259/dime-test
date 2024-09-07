@@ -1,4 +1,4 @@
-import { Box } from "../../../../../../shared/components";
+import { Box } from "../../../../../shared/components";
 import { IconCurrencyDollar } from "@tabler/icons-react";
 
 interface InfoBoxProps {

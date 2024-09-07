@@ -1,14 +1,13 @@
 import { IconMinus } from "@tabler/icons-react";
 import { Input } from "../../../../../../shared/components";
 import { uniqueKey } from "../../../../../../utils";
+import { RemovableInfoProps } from "../../common/interface";
 
-interface AssetsInfoProps {
-  index: number;
-  remove: (index: number) => void;
-  itemKey?: string | number;
-}
-
-export const AssetsInfo = ({ index = 1, remove, itemKey }: AssetsInfoProps) => {
+export const AssetsInfo = ({
+  index = 1,
+  remove,
+  itemKey,
+}: RemovableInfoProps) => {
   return (
     <div
       className="flex flex-row items-center gap-3"
