@@ -14,7 +14,7 @@ export const getStyles = ({
   const button = [
     "inline-flex",
     "gap-[4px]",
-    "justify-between",
+    // "justify-between",
     "items-center",
     "hover:opacity-80",
     "rounded-[3px]",
