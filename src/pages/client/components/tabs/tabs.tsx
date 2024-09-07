@@ -10,6 +10,7 @@ import {
   Financials,
   Insurance,
   InsuranceQuotes,
+  Marketing,
   Relationships,
 } from ".";
 
@@ -34,6 +35,6 @@ export const tabItems: TabItemsShape[] = [
     icon: <IconCircle />,
     content: <InsuranceQuotes />,
   },
-  { id: 6, label: "Marketing", icon: <IconCircle /> },
+  { id: 6, label: "Marketing", icon: <IconCircle />, content: <Marketing /> },
   { id: 7, label: "Legal and Compliance", icon: <IconCircle /> },
 ];
