@@ -8,6 +8,7 @@ export default {
         primary: "#29A87E",
         dark: "#091214",
         shade: "#F3F8F8",
+        tealGray: "#5A706F",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
