@@ -3,7 +3,7 @@ import { StyleProps } from "./types";
 export const getStyles = ({ disabled }: StyleProps) => {
   const container = "relative w-full";
   const inputBox = [
-    "flex justify-between items-center px-3.5 py-2",
+    "flex justify-between items-center px-3.5 py-1.5",
     "border border-gray-300 rounded-md shadow-sm cursor-pointer",
     "focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500",
     disabled && "opacity-50 cursor-not-allowed",
@@ -12,7 +12,7 @@ export const getStyles = ({ disabled }: StyleProps) => {
   const label = [
     "absolute px-1 left-2.5 -top-2.5",
     "bg-white",
-    "text-xs text-zinc-400",
+    "text-xs text-zinc-500",
     "peer-focus:text-xs peer-focus:-top-2.5 peer-focus:text-blue-400",
     "cursor-text peer-placeholder-shown:text-md float-labels peer-placeholder-shown:top-3",
     "truncate max-w-[calc(100%-18px)]",

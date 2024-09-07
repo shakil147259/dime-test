@@ -22,7 +22,7 @@ export const Select = forwardRef(
           className={twMerge(styles.inputBox)}
           onClick={() => !disabled && setIsOpen(!isOpen)}
         >
-          <span className="py-[2px]">
+          <span className="py-[2px] text-zinc-500">
             {options.find((option) => option.value === value)?.label ||
               "Select option"}
           </span>
