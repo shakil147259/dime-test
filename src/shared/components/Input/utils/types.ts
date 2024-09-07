@@ -1,10 +1,10 @@
 export type Props = React.InputHTMLAttributes<HTMLInputElement> & InputProps;
 export type InputProps = {
   label: string;
-  value: string;
+  value?: string;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   className?: string;
   labelOutlined?: boolean;
 };
