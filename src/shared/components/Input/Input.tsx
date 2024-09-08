@@ -2,10 +2,10 @@ import { twMerge } from "tailwind-merge";
 import "./utils/styles.css";
 import { getStyles } from "./utils/styles";
 import { forwardRef } from "react";
-import { InputProps } from "./utils/types";
+import { Props } from "./utils/types";
 
 export const Input = forwardRef(function Input(
-  { labelOutlined = false, label, onChange, rightIcon, ...rest }: InputProps,
+  { labelOutlined = false, label, onChange, rightIcon, ...rest }: Props,
   ref: React.Ref<HTMLInputElement>
 ) {
   const styles = getStyles({ labelOutlined });
@@ -27,10 +27,7 @@ export const Input = forwardRef(function Input(
         }}
       />
       {rightIcon ? <span className={styles.rightIcon}>{rightIcon}</span> : null}
-      <label
-        htmlFor="outline"
-        className={twMerge(styles.label, rest.className)}
-      >
+      <label htmlFor="outline" className={twMerge(styles.label)}>
         {label}
       </label>
     </div>

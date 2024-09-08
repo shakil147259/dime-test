@@ -12,7 +12,7 @@ export const getStyles = ({ labelOutlined }: StyleProps) => {
   const label = [
     "absolute px-1 left-2.5 -top-2.5",
     "bg-white rounded",
-    "text-xs text-zinc-500",
+    "text-xs text-zinc-500 uppercase",
     "peer-focus:text-xs peer-focus:-top-2.5 peer-focus:text-blue-400",
     labelOutlined
       ? ""
