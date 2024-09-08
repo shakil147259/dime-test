@@ -12,3 +12,10 @@ export const isSameDay = (dateA: Date, dateB: Date) => {
 export const uniqueKey = (prefix: string): string => {
   return `${prefix}-${uuidv4()}`;
 };
+
+export const enumToOptions = <T extends string>(enumObj: Record<string, T>) => {
+  return Object.keys(enumObj).map((key) => ({
+    label: key.split("_").join(" "),
+    value: enumObj[key as keyof typeof enumObj],
+  }));
+};
