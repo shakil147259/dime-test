@@ -1,8 +1,9 @@
 import { IconCheck, IconChevronDown } from "@tabler/icons-react";
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { Props } from "./utils/types";
 import { getStyles } from "./utils/styles";
+import { useAccessibility } from "./utils/useAccessiblity";
 
 export const Select = forwardRef(
   (
@@ -16,13 +17,24 @@ export const Select = forwardRef(
       setIsOpen(false);
     };
 
+    const newRef = useRef(null);
+    const containerRef = ref ? ref : newRef;
+    const openerRef = useRef(null);
+    useAccessibility({
+      isOpen,
+      setIsOpen,
+      ref: containerRef as React.MutableRefObject<null>,
+      openerRef,
+    });
+
     return (
       <div className={twMerge(styles.container)}>
         <div
+          ref={openerRef}
           className={twMerge(styles.inputBox)}
           onClick={() => !disabled && setIsOpen(!isOpen)}
         >
-          <span className="py-[2px] text-zinc-500">
+          <span className="py-[2px] text-zinc-500 truncate">
             {options.find((option) => option.value === value)?.label ||
               "Select option"}
           </span>
@@ -39,7 +51,7 @@ export const Select = forwardRef(
 
         {isOpen && (
           <div className={styles.optionsContainer}>
-            <ul ref={ref} className={styles.optionsUL}>
+            <ul ref={containerRef} className={styles.optionsUL}>
               {options.map((option) => (
                 <li
                   key={option.value}

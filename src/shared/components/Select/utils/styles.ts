@@ -12,7 +12,7 @@ export const getStyles = ({ disabled }: StyleProps) => {
   const label = [
     "absolute px-1 left-2.5 -top-2.5",
     "bg-white",
-    "text-xs text-zinc-500",
+    "text-xs text-zinc-500 uppercase",
     "peer-focus:text-xs peer-focus:-top-2.5 peer-focus:text-blue-400",
     "cursor-text peer-placeholder-shown:text-md float-labels peer-placeholder-shown:top-3",
     "truncate max-w-[calc(100%-18px)]",
