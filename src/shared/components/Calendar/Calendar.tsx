@@ -7,11 +7,24 @@ import { getStyles } from "./utils/style";
 
 interface CalendarProps {
   inputUI?: ReactElement;
+  onDateChange?: (date: Date | null) => void;
+  selectedDate?: Date | null;
 }
 
-export const Calendar = ({ inputUI }: CalendarProps) => {
-  const [startDate, setStartDate] = useState(new Date());
+export const Calendar = ({
+  inputUI,
+  onDateChange,
+  selectedDate,
+}: CalendarProps) => {
+  const [startDate, setStartDate] = useState<Date>();
   const styles = getStyles();
+
+  const handleDateChange = (date: Date | null) => {
+    if (date) setStartDate(date);
+    if (onDateChange) {
+      onDateChange(date);
+    }
+  };
   return (
     <DatePicker
       wrapperClassName="w-full relative"
@@ -19,8 +32,8 @@ export const Calendar = ({ inputUI }: CalendarProps) => {
       showYearDropdown
       dropdownMode="select"
       customInput={inputUI}
-      selected={startDate}
-      onChange={(date) => date && setStartDate(date)}
+      selected={selectedDate || startDate}
+      onChange={handleDateChange}
       dayClassName={(date: Date) => {
         return twMerge(
           styles.cell,

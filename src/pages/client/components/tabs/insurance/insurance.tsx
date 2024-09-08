@@ -1,4 +1,5 @@
 import { ReactNode, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
   Button,
@@ -10,9 +11,14 @@ import {
 } from "../../../../../shared/components";
 import { IconCalendarMonth, IconPlus, IconX } from "@tabler/icons-react";
 import { BeneficiaryInfo } from "./components/beneficiaryInfo";
-import { uniqueKey } from "../../../../../utils";
+import { enumToOptions, uniqueKey } from "../../../../../utils";
+import { RootState } from "../../../../../app/store";
+import { insuranceUpdate, addBeneficiary } from "./store/insuranceSlice";
+import { PAYMENT_FREQUENCY, POLICY_TYPE } from "./store/types";
 
 export const Insurance = () => {
+  const state = useSelector((state: RootState) => state.insuranceInfo);
+  const dispatch = useDispatch();
   const [beneficiaries, setBeneficiaries] = useState<ReactNode[]>([]);
 
   const removeBeneficiary = (indexToRemove: number) => {
@@ -21,19 +27,57 @@ export const Insurance = () => {
     );
   };
 
+  const addBeneficiaries = () => {
+    const index = state.beneFiciaries.length;
+    setBeneficiaries((prev) => {
+      return [
+        ...prev,
+
+        <BeneficiaryInfo
+          index={index + 1}
+          remove={removeBeneficiary}
+          key={uniqueKey(`beneficiaries-${index}`)}
+        />,
+      ];
+    });
+    dispatch(addBeneficiary({ index }));
+  };
+
   const policySection = (
     <div className="policy my-10 flex flex-col gap-8">
       <div className="flex flex-row gap-2">
-        <Input label="Policy Number" labelOutlined className="uppercase" />
+        <Input
+          label="Policy Number"
+          labelOutlined
+          value={state.policyNumber}
+          onChange={(e) => {
+            const { value } = e.target;
+            dispatch(insuranceUpdate({ key: "policyNumber", value }));
+          }}
+        />
 
         <Select
           label="Policy Type"
-          options={[
-            { label: "Male", value: "m" },
-            { label: "Female", value: "f" },
-          ]}
+          options={enumToOptions(POLICY_TYPE)}
+          value={state.policyType}
+          onChange={(v) => {
+            dispatch(
+              insuranceUpdate({ key: "policyType", value: v as string })
+            );
+          }}
         />
         <Calendar
+          onDateChange={(date) => {
+            dispatch(
+              insuranceUpdate({
+                key: "policyStartDate",
+                value: date ? date.toISOString().split("T")[0] : "",
+              })
+            );
+          }}
+          selectedDate={
+            state.policyStartDate ? new Date(state.policyStartDate) : null
+          }
           inputUI={
             <Input
               label="Policy Start Date"
@@ -45,6 +89,17 @@ export const Insurance = () => {
         />
 
         <Calendar
+          onDateChange={(date) => {
+            dispatch(
+              insuranceUpdate({
+                key: "policyEndDate",
+                value: date ? date.toISOString().split("T")[0] : "",
+              })
+            );
+          }}
+          selectedDate={
+            state.policyEndDate ? new Date(state.policyEndDate) : null
+          }
           inputUI={
             <Input
               label="Policy End Date"
@@ -56,14 +111,35 @@ export const Insurance = () => {
         />
       </div>
       <div className="flex flex-row gap-2">
-        <Input label="Coverage Amount" labelOutlined className="uppercase" />
-        <Input label="Premium Amount" labelOutlined className="uppercase" />
+        <Input
+          label="Coverage Amount"
+          labelOutlined
+          value={state.coverageAmount}
+          type="number"
+          onChange={(e) => {
+            const { value } = e.target;
+            dispatch(insuranceUpdate({ key: "coverageAmount", value }));
+          }}
+        />
+        <Input
+          label="Premium Amount"
+          labelOutlined
+          value={state.premiumAmount}
+          type="number"
+          onChange={(e) => {
+            const { value } = e.target;
+            dispatch(insuranceUpdate({ key: "premiumAmount", value }));
+          }}
+        />
         <Select
           label="Payment Frequency"
-          options={[
-            { label: "Male", value: "m" },
-            { label: "Female", value: "f" },
-          ]}
+          options={enumToOptions(PAYMENT_FREQUENCY)}
+          value={state.paymentFrequency}
+          onChange={(v) => {
+            dispatch(
+              insuranceUpdate({ key: "paymentFrequency", value: v as string })
+            );
+          }}
         />
       </div>
     </div>
@@ -75,19 +151,7 @@ export const Insurance = () => {
         size="lg"
         variant="outlined"
         className="border-primary focus:ring-primary text-primary"
-        onClick={() => {
-          setBeneficiaries((prev) => {
-            const index = beneficiaries.length + 1;
-            return [
-              ...prev,
-              <BeneficiaryInfo
-                index={index}
-                remove={removeBeneficiary}
-                key={uniqueKey(`beneficiaries-${index}`)}
-              />,
-            ];
-          });
-        }}
+        onClick={() => addBeneficiaries()}
       >
         <IconPlus />
         Add Beneficiaries

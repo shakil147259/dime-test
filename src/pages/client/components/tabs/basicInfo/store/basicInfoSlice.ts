@@ -6,8 +6,6 @@ const initialState: BasicInfoShape = {
   lastName: "",
   gender: "",
   dob: "",
-  policyStartDate: new Date(),
-  policyEndDate: new Date(),
   socialSecurityNumber: "",
   emailAddress: "",
   phoneNumber: "",
@@ -22,7 +20,6 @@ const initialState: BasicInfoShape = {
   state: "",
   zipCode: "",
   country: "",
-  beneFiciaries: [],
 };
 
 const basicInfoSlice = createSlice({

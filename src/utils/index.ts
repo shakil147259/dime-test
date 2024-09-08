@@ -19,3 +19,11 @@ export const enumToOptions = <T extends string>(enumObj: Record<string, T>) => {
     value: enumObj[key as keyof typeof enumObj],
   }));
 };
+
+export const formatCurrency = (value: number) => {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+  }).format(value);
+};

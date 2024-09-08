@@ -1,0 +1,71 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  BeneficiariesType,
+  InsuranceShape,
+  InsuranceUpdatePayload,
+} from "./types";
+
+const initialState: InsuranceShape = {
+  policyNumber: "",
+  policyType: "",
+  policyStartDate: "",
+  policyEndDate: "",
+  coverageAmount: "",
+  premiumAmount: "",
+  paymentFrequency: "",
+  beneFiciaries: [],
+};
+
+const insuranceSlice = createSlice({
+  name: "clientBasicInfo",
+  initialState,
+  reducers: {
+    insuranceUpdate<K extends keyof InsuranceShape>(
+      state: InsuranceShape,
+      action: PayloadAction<InsuranceUpdatePayload<K>>
+    ) {
+      const { key, value } = action.payload;
+      state[key] = value;
+    },
+    insuranceReset() {
+      return initialState;
+    },
+    addBeneficiary(
+      state: InsuranceShape,
+      action: PayloadAction<{ index: number }>
+    ) {
+      const { index } = action.payload;
+      state.beneFiciaries.push({
+        index,
+        name: "",
+        percentage: "",
+        relationship: "",
+      });
+    },
+    updateBeneficiary(
+      state: InsuranceShape,
+      action: PayloadAction<BeneficiariesType>
+    ) {
+      const { index, name, relationship, percentage } = action.payload;
+      state.beneFiciaries[index] = { index, name, relationship, percentage };
+    },
+    removeBeneficiary(
+      state: InsuranceShape,
+      action: PayloadAction<{ index: number }>
+    ) {
+      const { index } = action.payload;
+      state.beneFiciaries = state.beneFiciaries.filter(
+        (_, itemIndex) => itemIndex !== index
+      );
+    },
+  },
+});
+export const {
+  insuranceUpdate,
+  insuranceReset,
+
+  addBeneficiary,
+  updateBeneficiary,
+  removeBeneficiary,
+} = insuranceSlice.actions;
+export default insuranceSlice.reducer;

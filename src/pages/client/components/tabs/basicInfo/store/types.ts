@@ -1,17 +1,8 @@
-interface BeneficiariesType {
-  index: number;
-  name: string;
-  relationship: string;
-  percentage: number;
-}
-
 export interface BasicInfoShape {
   firstName: string;
   lastName: string;
   gender: string;
   dob: string;
-  policyStartDate: Date;
-  policyEndDate: Date;
   socialSecurityNumber: string;
   servicePreference: string;
   preferredContactMethod: string;
@@ -26,7 +17,6 @@ export interface BasicInfoShape {
   state: string;
   zipCode: string;
   country: string;
-  beneFiciaries: BeneficiariesType[];
 }
 
 export type BasicInfoUpdatePayload<K extends keyof BasicInfoShape> = {

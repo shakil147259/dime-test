@@ -16,10 +16,10 @@ export const Input = forwardRef(function Input(
         {...rest}
         ref={ref}
         id="outline"
-        type="text"
         className={twMerge(styles.input, rest.className)}
         placeholder=""
         value={rest.value}
+        autoComplete="off"
         onChange={(e) => {
           if (onChange) {
             onChange(e);
