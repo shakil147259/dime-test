@@ -1,32 +1,24 @@
 import { IconMinus } from "@tabler/icons-react";
 import { Input, Select } from "../../../../../../shared/components";
-import { uniqueKey } from "../../../../../../utils";
+import { enumToOptions, uniqueKey } from "../../../../../../utils";
 import { RootState } from "../../../../../../app/store";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  insuranceUpdate,
-  removeBeneficiary,
-  updateBeneficiary,
-} from "../store/insuranceSlice";
-import { useState } from "react";
+import { removeBeneficiary, updateBeneficiary } from "../store/insuranceSlice";
+import { RELATIONSHIP } from "../store/types";
 
 export interface BeneficiaryInfoProps {
   index: number;
-  remove: (index: number) => void;
   itemKey?: string | number;
 }
 
 export const BeneficiaryInfo = ({
   index = 1,
-  remove,
   itemKey,
 }: BeneficiaryInfoProps) => {
-  //const state = useSelector((state: RootState) => state.insuranceInfo.beneFiciaries);
-  // const beneficiary = useSelector(
-  //   (state: RootState) => state.insuranceInfo.beneFiciaries
-  // );
-  //const dispatch = useDispatch();
-  const [namex, setNamex] = useState("second");
+  const state = useSelector((state: RootState) => state.insuranceInfo);
+
+  const dispatch = useDispatch();
+
   return (
     <div
       className="flex flex-row items-center gap-3"
@@ -34,36 +26,52 @@ export const BeneficiaryInfo = ({
     >
       <Input
         labelOutlined
-        label={`Beneficiary ${index} Name`}
-        value={namex}
+        label={`Beneficiary ${index + 1} Name`}
+        value={state.beneFiciaries[index].name}
         type="text"
-        //onBlur={handleBlur}
         onChange={(e) => {
-          setNamex(e.target.value);
-          // dispatch(
-          //   updateBeneficiary({
-          //     index: 1,
-          //     name: e.target.value,
-          //     percentage: "10",
-          //     relationship: "ho",
-          //   })
-          // );
+          dispatch(
+            updateBeneficiary({
+              index,
+              name: e.target.value,
+              percentage: "",
+              relationship: "",
+            })
+          );
         }}
       />
       <Select
         label="Relationship"
-        options={[
-          { label: "Male", value: "m" },
-          { label: "Female", value: "f" },
-        ]}
+        options={enumToOptions(RELATIONSHIP)}
+        value={state.beneFiciaries[index].relationship}
+        onChange={(v) => {
+          dispatch(
+            updateBeneficiary({
+              index,
+              relationship: v as string,
+            })
+          );
+        }}
       />
-      <Input labelOutlined label="Percentage" />
-      <span className="w-8 cursor-pointer">
+      <Input
+        labelOutlined
+        label="Percentage"
+        value={state.beneFiciaries[index].percentage}
+        type="number"
+        onChange={(e) => {
+          dispatch(
+            updateBeneficiary({
+              index,
+              percentage: e.target.value,
+            })
+          );
+        }}
+      />
+      <span className="w-8 cursor-pointer hover:bg-slate-100 hover:rounded-full p-1">
         <IconMinus
           size={15}
           onClick={() => {
-            remove(index - 1);
-            // dispatch(removeBeneficiary({ index: index - 1 }));
+            dispatch(removeBeneficiary({ index }));
           }}
         />
       </span>

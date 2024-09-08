@@ -33,3 +33,10 @@ export enum PAYMENT_FREQUENCY {
   SEMI_ANNUAL = "semi_annual",
   ANNUAL = "annual",
 }
+
+export enum RELATIONSHIP {
+  SELF = "Self",
+  SPOUSE = "Spouse",
+  CHILDREN = "Children",
+  OTHER = "Other",
+}

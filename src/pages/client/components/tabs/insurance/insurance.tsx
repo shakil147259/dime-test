@@ -1,4 +1,3 @@
-import { ReactNode, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
@@ -11,7 +10,7 @@ import {
 } from "../../../../../shared/components";
 import { IconCalendarMonth, IconPlus, IconX } from "@tabler/icons-react";
 import { BeneficiaryInfo } from "./components/beneficiaryInfo";
-import { enumToOptions, uniqueKey } from "../../../../../utils";
+import { enumToOptions } from "../../../../../utils";
 import { RootState } from "../../../../../app/store";
 import { insuranceUpdate, addBeneficiary } from "./store/insuranceSlice";
 import { PAYMENT_FREQUENCY, POLICY_TYPE } from "./store/types";
@@ -19,27 +18,9 @@ import { PAYMENT_FREQUENCY, POLICY_TYPE } from "./store/types";
 export const Insurance = () => {
   const state = useSelector((state: RootState) => state.insuranceInfo);
   const dispatch = useDispatch();
-  const [beneficiaries, setBeneficiaries] = useState<ReactNode[]>([]);
-
-  const removeBeneficiary = (indexToRemove: number) => {
-    setBeneficiaries((prevBeneficiaries) =>
-      prevBeneficiaries.filter((_, index) => index !== indexToRemove)
-    );
-  };
 
   const addBeneficiaries = () => {
     const index = state.beneFiciaries.length;
-    setBeneficiaries((prev) => {
-      return [
-        ...prev,
-
-        <BeneficiaryInfo
-          index={index + 1}
-          remove={removeBeneficiary}
-          key={uniqueKey(`beneficiaries-${index}`)}
-        />,
-      ];
-    });
     dispatch(addBeneficiary({ index }));
   };
 
@@ -156,8 +137,8 @@ export const Insurance = () => {
         <IconPlus />
         Add Beneficiaries
       </Button>
-      {beneficiaries.map((item) => {
-        return item;
+      {state.beneFiciaries.map((_, index) => {
+        return <BeneficiaryInfo index={index} itemKey={index} />;
       })}
 
       <Box height={50} className="bg-red-900 w-full text-white text-lg">
@@ -173,12 +154,10 @@ export const Insurance = () => {
     <>
       <Label as="h2">Policy Details</Label>
       <Divider />
-
       {policySection}
 
       <Label as="h2">Beneficiaries</Label>
       <Divider />
-
       {beneficiariesSection}
     </>
   );

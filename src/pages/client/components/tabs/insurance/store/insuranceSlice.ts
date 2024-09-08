@@ -27,9 +27,11 @@ const insuranceSlice = createSlice({
       const { key, value } = action.payload;
       state[key] = value;
     },
+
     insuranceReset() {
       return initialState;
     },
+
     addBeneficiary(
       state: InsuranceShape,
       action: PayloadAction<{ index: number }>
@@ -42,13 +44,18 @@ const insuranceSlice = createSlice({
         relationship: "",
       });
     },
+
     updateBeneficiary(
       state: InsuranceShape,
-      action: PayloadAction<BeneficiariesType>
+      action: PayloadAction<Partial<BeneficiariesType> & { index: number }>
     ) {
-      const { index, name, relationship, percentage } = action.payload;
-      state.beneFiciaries[index] = { index, name, relationship, percentage };
+      const { index, ...updates } = action.payload;
+      state.beneFiciaries[index] = {
+        ...state.beneFiciaries[index],
+        ...updates,
+      };
     },
+
     removeBeneficiary(
       state: InsuranceShape,
       action: PayloadAction<{ index: number }>
