@@ -5,36 +5,22 @@ import {
   Input,
   Label,
 } from "../../../../../shared/components";
-import { ReactNode, useState } from "react";
-import { uniqueKey } from "../../../../../utils";
 
 import { CampaignsInfo } from "./components/campaignsInfo";
 import { ResponseInfo } from "./components/responseInfo";
 import { ProfilesInfo } from "./components/profilesInfo";
+import { RootState } from "../../../../../app/store";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addCampaign,
+  addMediaProfile,
+  addResponseToCampaign,
+  updateMarketingInfo,
+} from "./store/marketingInfoSlice";
 
 export const Marketing = () => {
-  const [marketingCampaigns, setMarketingCampaigns] = useState<ReactNode[]>([]);
-  const [response, setResponse] = useState<ReactNode[]>([]);
-  const [profiles, setProfiles] = useState<ReactNode[]>([]);
-
-  const removeMarketingCampaigns = (indexToRemove: number) => {
-    setMarketingCampaigns((prevCampaigns) =>
-      prevCampaigns.filter((_, index) => index !== indexToRemove)
-    );
-  };
-
-  const removeResponse = (indexToRemove: number) => {
-    setResponse((prevResponse) =>
-      prevResponse.filter((_, index) => index !== indexToRemove)
-    );
-  };
-
-  const removeProfiles = (indexToRemove: number) => {
-    setProfiles((prevProfiles) =>
-      prevProfiles.filter((_, index) => index !== indexToRemove)
-    );
-  };
-
+  const state = useSelector((state: RootState) => state.marketingInfo);
+  const dispatch = useDispatch();
   const marketinCampaignsSection = (
     <div className="address my-10 flex flex-col  gap-8">
       <Button
@@ -42,24 +28,14 @@ export const Marketing = () => {
         variant="outlined"
         className="border-primary focus:ring-primary text-primary"
         onClick={() => {
-          setMarketingCampaigns((prev) => {
-            const index = marketingCampaigns.length + 1;
-            return [
-              ...prev,
-              <CampaignsInfo
-                index={index}
-                remove={removeMarketingCampaigns}
-                key={uniqueKey(`beneficiaries-${index}`)}
-              />,
-            ];
-          });
+          dispatch(addCampaign({ index: state.marketinCampaigns.length }));
         }}
       >
         <IconPlus />
         Add Marketing Campaign
       </Button>
-      {marketingCampaigns.map((item) => {
-        return item;
+      {state.marketinCampaigns.map((_, i) => {
+        return <CampaignsInfo index={i} itemKey={`campaign-${1}`} />;
       })}
     </div>
   );
@@ -71,24 +47,16 @@ export const Marketing = () => {
         variant="outlined"
         className="border-primary focus:ring-primary text-primary"
         onClick={() => {
-          setResponse((prev) => {
-            const index = response.length + 1;
-            return [
-              ...prev,
-              <ResponseInfo
-                index={index}
-                remove={removeResponse}
-                key={uniqueKey(`response-${index}`)}
-              />,
-            ];
-          });
+          dispatch(
+            addResponseToCampaign({ index: state.responseToCampaigns.length })
+          );
         }}
       >
         <IconPlus />
         Add Response to Campaigns
       </Button>
-      {response.map((item) => {
-        return item;
+      {state.responseToCampaigns.map((_, i) => {
+        return <ResponseInfo index={i} itemKey={`marketing_response_${i}`} />;
       })}
     </div>
   );
@@ -99,7 +67,16 @@ export const Marketing = () => {
         <Input
           label="Interest and Preferences"
           labelOutlined
-          className="uppercase"
+          value={state.interestsAndPreference}
+          onChange={(e) => {
+            const { value } = e.target;
+            dispatch(
+              updateMarketingInfo({
+                key: "interestsAndPreference",
+                value,
+              })
+            );
+          }}
         />
       </div>
     </div>
@@ -112,24 +89,14 @@ export const Marketing = () => {
         variant="outlined"
         className="border-primary focus:ring-primary text-primary"
         onClick={() => {
-          setProfiles((prev) => {
-            const index = profiles.length + 1;
-            return [
-              ...prev,
-              <ProfilesInfo
-                index={index}
-                remove={removeProfiles}
-                key={uniqueKey(`profiles-${index}`)}
-              />,
-            ];
-          });
+          dispatch(addMediaProfile({ index: state.mediaProfiles.length }));
         }}
       >
         <IconPlus />
         Add Asset
       </Button>
-      {profiles.map((item) => {
-        return item;
+      {state.mediaProfiles.map((_, i) => {
+        return <ProfilesInfo index={i} itemKey={`media_profile_${i}`} />;
       })}
     </div>
   );

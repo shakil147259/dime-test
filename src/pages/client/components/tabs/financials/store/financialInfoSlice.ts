@@ -11,8 +11,8 @@ const initialState: FinancialInfoShape = {
   assets: [],
   debts: [],
   incomeSources: [],
-  creditScore: 0,
-  taxBracket: 0,
+  creditScore: "",
+  taxBracket: "",
 };
 
 const financialInfoSlice = createSlice({
