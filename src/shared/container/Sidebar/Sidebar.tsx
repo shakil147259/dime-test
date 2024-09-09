@@ -16,7 +16,7 @@ const Sidebar = () => {
   );
 
   return (
-    <div className="bg-dark text-gray-100 min-w-60 min-h-screen flex flex-col justify-between">
+    <div className="bg-dark text-gray-100 min-w-60 h-screen flex flex-col justify-between">
       <div>
         <div className="px-6 py-4 text-center">
           <h1 className="text-2xl scale-x-110 tracking-tighter">

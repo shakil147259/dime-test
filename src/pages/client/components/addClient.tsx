@@ -17,7 +17,7 @@ export const AddClient = () => {
     { value: "option3", label: "Option 3" },
   ];
   return (
-    <div className="page-container w-full flex flex-col p-2">
+    <div className="page-container w-full flex flex-col p-2 h-screen overflow-scroll">
       <div className="header inline-flex justify-between w-full">
         <Label as="h1">New Client</Label>
 
