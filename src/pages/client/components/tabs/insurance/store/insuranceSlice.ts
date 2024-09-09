@@ -17,7 +17,7 @@ const initialState: InsuranceShape = {
 };
 
 const insuranceSlice = createSlice({
-  name: "clientBasicInfo",
+  name: "insuranceInfo",
   initialState,
   reducers: {
     insuranceUpdate<K extends keyof InsuranceShape>(

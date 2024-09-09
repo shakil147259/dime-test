@@ -16,7 +16,6 @@ export const BeneficiaryInfo = ({
   itemKey,
 }: BeneficiaryInfoProps) => {
   const state = useSelector((state: RootState) => state.insuranceInfo);
-
   const dispatch = useDispatch();
 
   return (
@@ -27,15 +26,13 @@ export const BeneficiaryInfo = ({
       <Input
         labelOutlined
         label={`Beneficiary ${index + 1} Name`}
-        value={state.beneFiciaries[index].name}
         type="text"
+        value={state.beneFiciaries[index].name}
         onChange={(e) => {
           dispatch(
             updateBeneficiary({
               index,
               name: e.target.value,
-              percentage: "",
-              relationship: "",
             })
           );
         }}

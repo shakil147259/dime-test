@@ -94,7 +94,7 @@ export const Marketing = () => {
   );
 
   const interestsSection = (
-    <div className="debts my-10 flex flex-col gap-8">
+    <div className="interests my-10 flex flex-col gap-8">
       <div className="flex flex-row gap-2">
         <Input
           label="Interest and Preferences"
@@ -106,7 +106,7 @@ export const Marketing = () => {
   );
 
   const profilesSection = (
-    <div className="debts my-10 flex flex-col gap-8">
+    <div className="profiles my-10 flex flex-col gap-8">
       <Button
         size="lg"
         variant="outlined"
