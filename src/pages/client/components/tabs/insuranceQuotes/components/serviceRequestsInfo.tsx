@@ -5,7 +5,6 @@ import { RemovableInfoProps } from "../../common/interface";
 
 export const ServiceRequestsInfo = ({
   index = 1,
-  remove,
   itemKey,
 }: RemovableInfoProps) => {
   return (
@@ -27,12 +26,7 @@ export const ServiceRequestsInfo = ({
       />
 
       <span className="w-8 cursor-pointer">
-        <IconMinus
-          size={15}
-          onClick={() => {
-            remove(index - 1);
-          }}
-        />
+        <IconMinus size={15} />
       </span>
     </div>
   );
