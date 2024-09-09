@@ -4,6 +4,7 @@ import insuranceReducer from "../pages/client/components/tabs/insurance/store/in
 import financialInfoReducer from "../pages/client/components/tabs/financials/store/financialInfoSlice";
 import relationshipReducer from "../pages/client/components/tabs/relationships/store/relationShipSlice";
 import marketingInfoReducer from "../pages/client/components/tabs/marketing/store/marketingInfoSlice";
+import complianceInfoReducer from "../pages/client/components/tabs/compliance/store/complianceSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     financialInfo: financialInfoReducer,
     relationshipInfo: relationshipReducer,
     marketingInfo: marketingInfoReducer,
+    complianceInfo: complianceInfoReducer,
   },
 });
 
