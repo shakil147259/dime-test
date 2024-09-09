@@ -6,41 +6,45 @@ import {
   Label,
   Select,
 } from "../../../../../shared/components";
-import { uniqueKey } from "../../../../../utils";
-import { ReactNode, useState } from "react";
+import { enumToOptions } from "../../../../../utils";
 import { ChildInfo } from "./components/childInfo";
 import { ImportantDates } from "./components/importantDates";
+import { Marital_Status } from "./store/types";
+import { RootState } from "../../../../../app/store";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addChildren,
+  addImportantDates,
+  updateRelationshipInfo,
+} from "./store/relationShipSlice";
 
 export const Relationships = () => {
-  const [child, setChild] = useState<ReactNode[]>([]);
-  const [importantDate, setImportantDate] = useState<ReactNode[]>([]);
-
-  const removeChild = (indexToRemove: number) => {
-    setChild((prevChild) =>
-      prevChild.filter((_, index) => index !== indexToRemove)
-    );
-  };
-
-  const removeImportantDate = (indexToRemove: number) => {
-    setImportantDate((prevDate) =>
-      prevDate.filter((_, index) => index !== indexToRemove)
-    );
-  };
+  const state = useSelector((state: RootState) => state.relationshipInfo);
+  const dispatch = useDispatch();
   const spouseSection = (
     <div className="spouse my-10 flex flex-col  gap-8">
       <div className="flex flex-row gap-3">
         <Select
           label="Marital Status"
-          options={[
-            { label: "Married", value: "m" },
-            { label: "Unmarried", value: "u" },
-          ]}
+          options={enumToOptions(Marital_Status)}
+          value={state.meritalStatus}
+          onChange={(v) => {
+            dispatch(
+              updateRelationshipInfo({
+                key: "meritalStatus",
+                value: v as string,
+              })
+            );
+          }}
         />
         <Input
           labelOutlined
           label="Name of Spouse/Partner"
-          value=""
-          className="uppercase"
+          value={state.nameOfSpouse}
+          onChange={(e) => {
+            const { value } = e.target;
+            dispatch(updateRelationshipInfo({ key: "nameOfSpouse", value }));
+          }}
         />
       </div>
     </div>
@@ -53,24 +57,14 @@ export const Relationships = () => {
         variant="outlined"
         className="border-primary focus:ring-primary text-primary"
         onClick={() => {
-          setChild((prev) => {
-            const index = child.length + 1;
-            return [
-              ...prev,
-              <ChildInfo
-                index={index}
-                remove={removeChild}
-                key={uniqueKey(`beneficiaries-${index}`)}
-              />,
-            ];
-          });
+          dispatch(addChildren({ index: state.children.length }));
         }}
       >
         <IconPlus />
         Add Children
       </Button>
-      {child.map((item) => {
-        return item;
+      {state.children.map((_, i) => {
+        return <ChildInfo index={i} itemKey={`children-${i}`} />;
       })}
     </div>
   );
@@ -82,24 +76,14 @@ export const Relationships = () => {
         variant="outlined"
         className="border-primary focus:ring-primary text-primary"
         onClick={() => {
-          setImportantDate((prev) => {
-            const index = child.length + 1;
-            return [
-              ...prev,
-              <ImportantDates
-                index={index}
-                remove={removeImportantDate}
-                key={uniqueKey(`immportantDates-${index}`)}
-              />,
-            ];
-          });
+          dispatch(addImportantDates({ index: state.importantDate.length }));
         }}
       >
         <IconPlus />
         Add Date
       </Button>
-      {importantDate.map((item) => {
-        return item;
+      {state.importantDate.map((_, i) => {
+        return <ImportantDates index={i} itemKey={`important-dates-${i}`} />;
       })}
     </div>
   );

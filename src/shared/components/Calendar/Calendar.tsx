@@ -4,6 +4,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { twMerge } from "tailwind-merge";
 import { isSameDay } from "../../../utils";
 import { getStyles } from "./utils/style";
+import Input from "../Input/Input";
+import { IconCalendarMonth } from "@tabler/icons-react";
 
 interface CalendarProps {
   inputUI?: ReactElement;
@@ -25,13 +27,27 @@ export const Calendar = ({
       onDateChange(date);
     }
   };
+
+  const defaultInputUI = (
+    <Input
+      label="Date"
+      value=""
+      rightIcon={
+        <IconCalendarMonth
+          size={15}
+          className="text-gray-500 rounded-full hover:bg-gray-200"
+        />
+      }
+    />
+  );
+
   return (
     <DatePicker
       wrapperClassName="w-full relative"
       showMonthDropdown
       showYearDropdown
       dropdownMode="select"
-      customInput={inputUI}
+      customInput={inputUI || defaultInputUI}
       selected={selectedDate || startDate}
       onChange={handleDateChange}
       dayClassName={(date: Date) => {
