@@ -7,6 +7,8 @@ export type TabItemsShape = {
 
 export type TabProps = {
   items: TabItemsShape[];
+  activeTabId: number;
+  setActiveTabId: (id: number) => void;
 };
 
 export type StyleProps = {

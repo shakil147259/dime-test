@@ -1,10 +1,12 @@
-import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { TabProps } from "./utils/types";
 import { getStyles } from "./utils/styles";
 
-export const Tab = ({ items: tabItems }: TabProps) => {
-  const [activeTab, setActiveTab] = useState(2);
+export const Tab = ({
+  items: tabItems,
+  activeTabId,
+  setActiveTabId,
+}: TabProps) => {
   const styles = getStyles();
 
   return (
@@ -14,10 +16,10 @@ export const Tab = ({ items: tabItems }: TabProps) => {
           {tabItems.map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => setActiveTabId(tab.id)}
               className={twMerge(
                 styles.nonSelectedTabs,
-                activeTab === tab.id && styles.selectedTab
+                activeTabId === tab.id && styles.selectedTab
               )}
             >
               <span className="mr-2">{tab.icon}</span>
@@ -29,11 +31,9 @@ export const Tab = ({ items: tabItems }: TabProps) => {
       <div className={styles.tabsContentContainer}>
         {tabItems.map(
           (tab) =>
-            activeTab === tab.id && (
+            activeTabId === tab.id && (
               <div key={tab.id} className="text-gray-800">
                 {tab.content}
-                {/* <h2 className="text-xl">{tab.label}</h2>
-                <p>Content for {tab.label} will appear here.</p> */}
               </div>
             )
         )}
