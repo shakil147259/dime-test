@@ -15,7 +15,6 @@ export const Input = forwardRef(function Input(
       <input
         {...rest}
         ref={ref}
-        id="outline"
         className={twMerge(styles.input, rest.className)}
         placeholder=""
         value={rest.value}
@@ -27,9 +26,7 @@ export const Input = forwardRef(function Input(
         }}
       />
       {rightIcon ? <span className={styles.rightIcon}>{rightIcon}</span> : null}
-      <label htmlFor="outline" className={twMerge(styles.label)}>
-        {label}
-      </label>
+      <label className={twMerge(styles.label)}>{label}</label>
       {error && <span className="text-red-500 text-xs mt-1">{error}</span>}
     </div>
   );

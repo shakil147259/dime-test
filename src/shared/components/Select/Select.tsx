@@ -45,9 +45,7 @@ export const Select = forwardRef(
             ])}
           />
         </div>
-        <label htmlFor="outline" className={twMerge(styles.label)}>
-          {label}
-        </label>
+        <label className={twMerge(styles.label)}>{label}</label>
 
         {isOpen && (
           <div className={styles.optionsContainer}>
