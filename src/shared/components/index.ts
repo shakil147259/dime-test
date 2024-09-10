@@ -5,4 +5,5 @@ export { Input } from "./Input/Input";
 export { Label } from "./Label/Label";
 export { Box } from "./Box/Box";
 export { Select } from "./Select/Select";
+export { Snackbar } from "./SnackBar/SnackBar";
 export { Tab } from "./Tab/Tab";
