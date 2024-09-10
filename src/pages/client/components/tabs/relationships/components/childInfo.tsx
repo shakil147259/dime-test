@@ -12,7 +12,7 @@ export const ChildInfo = ({ index = 0, itemKey }: RemovableInfoProps) => {
   return (
     <div
       className="flex flex-row items-center gap-3"
-      key={itemKey ?? uniqueKey(`child-${index}`)}
+      key={itemKey ?? uniqueKey(`children-${index}`)}
     >
       <Input
         labelOutlined

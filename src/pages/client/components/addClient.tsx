@@ -5,7 +5,14 @@ import {
   IconUser,
 } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
-import { Button, Input, Label, Select, Tab } from "../../../shared/components";
+import {
+  Button,
+  Input,
+  Label,
+  Select,
+  Snackbar,
+  Tab,
+} from "../../../shared/components";
 import Divider from "../../../shared/components/Divider/Divider";
 import { enumToOptions } from "../../../utils";
 import { tabItems } from "./tabs/tabs";
@@ -13,6 +20,9 @@ import { tabItems } from "./tabs/tabs";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
+import { RootState } from "../../../app/store";
+import { useDispatch, useSelector } from "react-redux";
+import { useAddClient } from "../../../api/hooks/useClientData";
 
 enum ADD_CLIENT_STATUS {
   NEW = "new",
@@ -26,6 +36,17 @@ export const AddClient = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [activeTabId, setActiveTabId] = useState(1);
   const [visitedTabs, setVisitedTabs] = useState<number[]>([]);
+  const [isSnackbarVisible, setSnackbarVisible] = useState(false);
+
+  const state = useSelector((state: RootState) => state);
+  const dispatch = useDispatch();
+
+  const showSnackbar = () => {
+    setSnackbarVisible(true);
+    setTimeout(() => {
+      setSnackbarVisible(false);
+    }, 5000);
+  };
 
   const defaultSchema = yup.object().shape({});
   const methods = useForm({
@@ -45,7 +66,19 @@ export const AddClient = () => {
     if (activeTabId > 1) setActiveTabId((prev) => prev - 1);
   };
 
-  const onSubmit = (data) => console.log(data);
+  const { mutate: addClient, isLoading: isAddingClient } = useAddClient();
+
+  const onSubmit = async () => {
+    addClient(state);
+    dispatch({ type: "RESET_STORE" });
+    setVisitedTabs([]);
+    setActiveTabId(1);
+    showSnackbar();
+  };
+
+  useEffect(() => {
+    console.log("isAddingClient:", isAddingClient);
+  }, [isAddingClient]);
 
   useEffect(() => {
     setVisitedTabs((prev) => [...new Set([...prev, activeTabId])]);
@@ -74,7 +107,11 @@ export const AddClient = () => {
               <Button
                 rightIcon={<IconChevronRight size={15} />}
                 onClick={() => {
-                  goToNextTab();
+                  if (activeTabId == tabItems.length) {
+                    onSubmit();
+                  } else {
+                    goToNextTab();
+                  }
                 }}
               >
                 {activeTabId == tabItems.length ? "Complete" : "Next Step"}
@@ -107,6 +144,12 @@ export const AddClient = () => {
             />
           </div>
         </div>
+        <Snackbar
+          message="Information Saved Successfully"
+          type="success"
+          isVisible={isSnackbarVisible}
+          onClose={() => setSnackbarVisible(false)}
+        />
       </form>
     </FormProvider>
   );

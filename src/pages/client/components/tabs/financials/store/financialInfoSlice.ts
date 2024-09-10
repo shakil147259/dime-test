@@ -26,7 +26,9 @@ const financialInfoSlice = createSlice({
       const { key, value } = action.payload;
       state[key] = value;
     },
-
+    resetFinancialInfo() {
+      return initialState;
+    },
     addIncome(
       state: FinancialInfoShape,
       action: PayloadAction<{ index: number }>
@@ -119,6 +121,7 @@ const financialInfoSlice = createSlice({
 });
 export const {
   financialInfoUpdate,
+  resetFinancialInfo,
 
   addIncome,
   updateIncome,

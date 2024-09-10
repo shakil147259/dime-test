@@ -28,7 +28,7 @@ const insuranceSlice = createSlice({
       state[key] = value;
     },
 
-    insuranceReset() {
+    resetInsurance() {
       return initialState;
     },
 
@@ -69,7 +69,7 @@ const insuranceSlice = createSlice({
 });
 export const {
   insuranceUpdate,
-  insuranceReset,
+  resetInsurance,
 
   addBeneficiary,
   updateBeneficiary,

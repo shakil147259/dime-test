@@ -17,8 +17,12 @@ const complianceInfoSlice = createSlice({
       const { key, value } = action.payload;
       state[key] = value;
     },
+    resetcomplianceInfo() {
+      return initialState;
+    },
   },
 });
 
-export const { complianceInfoUpdate } = complianceInfoSlice.actions;
+export const { complianceInfoUpdate, resetcomplianceInfo } =
+  complianceInfoSlice.actions;
 export default complianceInfoSlice.reducer;

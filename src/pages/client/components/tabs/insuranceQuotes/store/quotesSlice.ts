@@ -9,6 +9,9 @@ const quotesInfoSlice = createSlice({
   name: "quotesInfo",
   initialState,
   reducers: {
+    resetQuotes() {
+      return initialState;
+    },
     addNote(state: QuotesShape, action: PayloadAction<{ index: number }>) {
       const { index } = action.payload;
       state.notes.push({
@@ -34,5 +37,6 @@ const quotesInfoSlice = createSlice({
   },
 });
 
-export const { addNote, updateNote, removeNote } = quotesInfoSlice.actions;
+export const { addNote, updateNote, removeNote, resetQuotes } =
+  quotesInfoSlice.actions;
 export default quotesInfoSlice.reducer;

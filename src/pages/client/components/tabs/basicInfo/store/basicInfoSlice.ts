@@ -33,10 +33,10 @@ const basicInfoSlice = createSlice({
       const { key, value } = action.payload;
       state[key] = value;
     },
-    basicInfoReset() {
+    resetBasicInfo() {
       return initialState;
     },
   },
 });
-export const { basicInfoUpdate, basicInfoReset } = basicInfoSlice.actions;
+export const { basicInfoUpdate, resetBasicInfo } = basicInfoSlice.actions;
 export default basicInfoSlice.reducer;

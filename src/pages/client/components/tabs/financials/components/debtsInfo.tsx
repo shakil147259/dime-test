@@ -7,7 +7,6 @@ import { RootState } from "../../../../../../app/store";
 import { updateDebts } from "../store/financialInfoSlice";
 
 export const DebtsInfo = ({ index = 1, itemKey }: RemovableInfoProps) => {
-  console.log("❎ ~ itemKey:", itemKey);
   const state = useSelector((state: RootState) => state.financialInfo);
   const dispatch = useDispatch();
   return (

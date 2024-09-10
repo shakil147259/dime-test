@@ -1,9 +1,4 @@
-import {
-  IconCheck,
-  IconCircle,
-  IconCircle1,
-  IconDotsCircleHorizontal,
-} from "@tabler/icons-react";
+import { IconCircle } from "@tabler/icons-react";
 import { TabItemsShape } from "../../../../shared/components/Tab/utils/types";
 import {
   BasicInfo,
@@ -21,14 +16,14 @@ export const tabItems: TabItemsShape[] = [
   {
     id: 1,
     label: "Basic Info",
-    icon: <IconCheck />,
+    icon: <IconCircle />,
     content: <BasicInfo />,
     schema: basicInfoSchema,
   },
   {
     id: 2,
     label: "Insurance",
-    icon: <IconDotsCircleHorizontal />,
+    icon: <IconCircle />,
     content: <Insurance />,
     schema: insuranceInfoSchema,
   },
@@ -36,7 +31,7 @@ export const tabItems: TabItemsShape[] = [
   {
     id: 4,
     label: "Relationship Management",
-    icon: <IconCircle1 />,
+    icon: <IconCircle />,
     content: <Relationships />,
   },
   {

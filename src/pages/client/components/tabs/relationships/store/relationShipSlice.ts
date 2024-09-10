@@ -24,7 +24,9 @@ export const relationshipSlice = createSlice({
       const { key, value } = action.payload;
       state[key] = value;
     },
-
+    resetRelationshipInfo() {
+      return initialState;
+    },
     addChildren(
       state: RelationshipShape,
       action: PayloadAction<{ index: number }>
@@ -91,6 +93,7 @@ export const relationshipSlice = createSlice({
 
 export const {
   updateRelationshipInfo,
+  resetRelationshipInfo,
 
   addChildren,
   updateChildren,

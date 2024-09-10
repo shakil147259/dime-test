@@ -4,6 +4,7 @@ import { NotesInfo } from "./components/notesInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../../app/store";
 import { addNote } from "./store/quotesSlice";
+import { uniqueKey } from "../../../../../utils";
 
 export const InsuranceQuotes = () => {
   const state = useSelector((state: RootState) => state.qtotesInfo);
@@ -22,7 +23,7 @@ export const InsuranceQuotes = () => {
         Add Notes
       </Button>
       {state.notes.map((_, i) => {
-        return <NotesInfo index={i} itemKey={`quote_note_${i}`} />;
+        return <NotesInfo index={i} itemKey={uniqueKey(`quote_note_${i}`)} />;
       })}
     </div>
   );

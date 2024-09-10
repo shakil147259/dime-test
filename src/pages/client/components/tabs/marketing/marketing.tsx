@@ -17,6 +17,7 @@ import {
   addResponseToCampaign,
   updateMarketingInfo,
 } from "./store/marketingInfoSlice";
+import { uniqueKey } from "../../../../../utils";
 
 export const Marketing = () => {
   const state = useSelector((state: RootState) => state.marketingInfo);
@@ -56,7 +57,12 @@ export const Marketing = () => {
         Add Response to Campaigns
       </Button>
       {state.responseToCampaigns.map((_, i) => {
-        return <ResponseInfo index={i} itemKey={`marketing_response_${i}`} />;
+        return (
+          <ResponseInfo
+            index={i}
+            itemKey={uniqueKey(`marketing_response_${i}`)}
+          />
+        );
       })}
     </div>
   );
