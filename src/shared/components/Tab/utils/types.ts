@@ -12,6 +12,7 @@ export type TabProps = {
   items: TabItemsShape[];
   activeTabId?: number;
   setActiveTabId?: (id: number) => void;
+  accessibleTabId?: number[];
 };
 
 export type StyleProps = {

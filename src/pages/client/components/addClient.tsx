@@ -4,7 +4,7 @@ import {
   IconNotes,
   IconUser,
 } from "@tabler/icons-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Input, Label, Select, Tab } from "../../../shared/components";
 import Divider from "../../../shared/components/Divider/Divider";
 import { enumToOptions } from "../../../utils";
@@ -13,7 +13,6 @@ import { tabItems } from "./tabs/tabs";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { basicInfoSchema } from "./tabs/basicInfo/store/schema";
 
 enum ADD_CLIENT_STATUS {
   NEW = "new",
@@ -26,6 +25,8 @@ enum ADD_CLIENT_STATUS {
 export const AddClient = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [activeTabId, setActiveTabId] = useState(1);
+  const [visitedTabs, setVisitedTabs] = useState<number[]>([]);
+
   const defaultSchema = yup.object().shape({});
   const methods = useForm({
     shouldUnregister: false,
@@ -39,11 +40,16 @@ export const AddClient = () => {
     if (isStepValid && activeTabId < tabItems.length)
       setActiveTabId((prev) => prev + 1);
   };
-  const onSubmit = (data) => console.log(data);
 
   const goToPrevTab = () => {
     if (activeTabId > 1) setActiveTabId((prev) => prev - 1);
   };
+
+  const onSubmit = (data) => console.log(data);
+
+  useEffect(() => {
+    setVisitedTabs((prev) => [...new Set([...prev, activeTabId])]);
+  }, [activeTabId]);
 
   return (
     <FormProvider {...methods}>
@@ -96,7 +102,8 @@ export const AddClient = () => {
             <Tab
               items={tabItems}
               activeTabId={activeTabId}
-              //setActiveTabId={setActiveTabId}
+              accessibleTabId={visitedTabs}
+              setActiveTabId={setActiveTabId}
             />
           </div>
         </div>
