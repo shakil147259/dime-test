@@ -1,10 +1,10 @@
-import { IconMinus } from "@tabler/icons-react";
 import { Input } from "../../../../../../shared/components";
 import { uniqueKey } from "../../../../../../utils";
 import { RemovableInfoProps } from "../../common/interface";
 import { RootState } from "../../../../../../app/store";
 import { useDispatch, useSelector } from "react-redux";
-import { updateIncome } from "../store/financialInfoSlice";
+import { removeIncome, updateIncome } from "../store/financialInfoSlice";
+import RemoveIcon from "../../common/removeIconContainer";
 
 export const IncomeSourceInfo = ({
   index = 1,
@@ -36,9 +36,11 @@ export const IncomeSourceInfo = ({
           dispatch(updateIncome({ index, annualIncome }));
         }}
       />
-      <span className="w-8 cursor-pointer">
-        <IconMinus size={15} />
-      </span>
+      <RemoveIcon
+        onClick={() => {
+          dispatch(removeIncome({ index }));
+        }}
+      />
     </div>
   );
 };

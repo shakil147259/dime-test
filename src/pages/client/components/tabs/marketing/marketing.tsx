@@ -36,7 +36,13 @@ export const Marketing = () => {
         Add Marketing Campaign
       </Button>
       {state.marketinCampaigns.map((_, i) => {
-        return <CampaignsInfo index={i} itemKey={`campaign-${1}`} />;
+        return (
+          <CampaignsInfo
+            index={i}
+            key={uniqueKey(`campaign-${1}`)}
+            itemKey={uniqueKey(`campaign-${1}`)}
+          />
+        );
       })}
     </div>
   );
@@ -102,7 +108,13 @@ export const Marketing = () => {
         Add Asset
       </Button>
       {state.mediaProfiles.map((_, i) => {
-        return <ProfilesInfo index={i} itemKey={`media_profile_${i}`} />;
+        return (
+          <ProfilesInfo
+            index={i}
+            key={uniqueKey(`media_profile_${i}`)}
+            itemKey={uniqueKey(`media_profile_${i}`)}
+          />
+        );
       })}
     </div>
   );

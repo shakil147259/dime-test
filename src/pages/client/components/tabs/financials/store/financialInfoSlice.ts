@@ -133,5 +133,6 @@ export const {
 
   addDebts,
   updateDebts,
+  removeDebts,
 } = financialInfoSlice.actions;
 export default financialInfoSlice.reducer;

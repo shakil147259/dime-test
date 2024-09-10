@@ -23,7 +23,13 @@ export const InsuranceQuotes = () => {
         Add Notes
       </Button>
       {state.notes.map((_, i) => {
-        return <NotesInfo index={i} itemKey={uniqueKey(`quote_note_${i}`)} />;
+        return (
+          <NotesInfo
+            index={i}
+            key={uniqueKey(`quote_note_${i}`)}
+            itemKey={uniqueKey(`quote_note_${i}`)}
+          />
+        );
       })}
     </div>
   );

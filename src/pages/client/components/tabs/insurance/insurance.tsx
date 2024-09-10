@@ -10,7 +10,7 @@ import {
 } from "../../../../../shared/components";
 import { IconCalendarMonth, IconPlus, IconX } from "@tabler/icons-react";
 import { BeneficiaryInfo } from "./components/beneficiaryInfo";
-import { enumToOptions } from "../../../../../utils";
+import { enumToOptions, uniqueKey } from "../../../../../utils";
 import { RootState } from "../../../../../app/store";
 import { insuranceUpdate, addBeneficiary } from "./store/insuranceSlice";
 import { PAYMENT_FREQUENCY, POLICY_TYPE } from "./store/types";
@@ -142,7 +142,13 @@ export const Insurance = () => {
         Add Beneficiaries
       </Button>
       {state.beneFiciaries.map((_, index) => {
-        return <BeneficiaryInfo index={index} itemKey={index} />;
+        return (
+          <BeneficiaryInfo
+            index={index}
+            key={uniqueKey(`beneficiary_${index}`)}
+            itemKey={uniqueKey(`beneficiary_${index}`)}
+          />
+        );
       })}
 
       <Box height={50} className="bg-red-900 w-full text-white text-lg">

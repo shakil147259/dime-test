@@ -6,7 +6,7 @@ import {
   Label,
   Select,
 } from "../../../../../shared/components";
-import { enumToOptions } from "../../../../../utils";
+import { enumToOptions, uniqueKey } from "../../../../../utils";
 import { ChildInfo } from "./components/childInfo";
 import { ImportantDates } from "./components/importantDates";
 import { Marital_Status } from "./store/types";
@@ -64,7 +64,13 @@ export const Relationships = () => {
         Add Children
       </Button>
       {state.children.map((_, i) => {
-        return <ChildInfo index={i} itemKey={`children-${i}`} />;
+        return (
+          <ChildInfo
+            index={i}
+            key={uniqueKey(`children-${i}`)}
+            itemKey={uniqueKey(`children-${i}`)}
+          />
+        );
       })}
     </div>
   );
