@@ -1,50 +1,31 @@
-# React + TypeScript + Vite
+# Insurgent
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Instruction for running the project:
 
-Currently, two official plugins are available:
+1. `npm install`
+2. `npm run dev` (http://localhost:3000/dashboard)
+3. `npm run server` (will run a dummy json server (port:3001) to store data)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Tools used:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. TailwindCSS
+2. Typescript
+3. redux-toolkit
+4. react-query
+5. axios
+6. react-hook-form
+7. yup
 
-- Configure the top-level `parserOptions` property like this:
+## Features:
+1. Multi step form
+2. Form Validation
+3. redux data store
+4. Little bit of accessibility feature(select component)
+5. And more...
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Feature Demo:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+https://github.com/user-attachments/assets/42b1fc18-4043-4602-ab8a-61c0dd51b14c
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
