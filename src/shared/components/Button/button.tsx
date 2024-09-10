@@ -35,6 +35,7 @@ export const Button: ButtonType = forwardRef<HTMLButtonElement, Props>(
         ref={ref}
         onClick={handleClick}
         className={twMerge(styles.button, rest.className)}
+        type={rest.type || "button"}
       >
         {leftIcon ? leftIcon : null}
         {children}

@@ -1,6 +1,6 @@
 import { StyleProps } from "./types";
 
-export const getStyles = ({ labelOutlined }: StyleProps) => {
+export const getStyles = ({ labelOutlined, error }: StyleProps) => {
   const container = "w-full relative";
   const input = [
     "w-full rounded-md px-3.5 py-2",
@@ -8,6 +8,7 @@ export const getStyles = ({ labelOutlined }: StyleProps) => {
     "focus:ring-blue-400 focus:ring-2 focus:ring-offset-0 focus:ring-offset-white focus:border-transparent",
     "transition-all",
     "peer",
+    error ? "border-red-500 focus:ring-red-500" : "",
   ];
   const label = [
     "absolute px-1 left-2.5 -top-2.5",

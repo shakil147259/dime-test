@@ -16,7 +16,9 @@ export const Tab = ({
           {tabItems.map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTabId(tab.id)}
+              onClick={() => {
+                if (setActiveTabId) setActiveTabId(tab.id);
+              }}
               className={twMerge(
                 styles.nonSelectedTabs,
                 activeTabId === tab.id && styles.selectedTab

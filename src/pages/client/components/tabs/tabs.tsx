@@ -14,14 +14,23 @@ import {
   Marketing,
   Relationships,
 } from ".";
+import { basicInfoSchema } from "./basicInfo/store/schema";
+import { insuranceInfoSchema } from "./insurance/store/schema";
 
 export const tabItems: TabItemsShape[] = [
-  { id: 1, label: "Basic Info", icon: <IconCheck />, content: <BasicInfo /> },
+  {
+    id: 1,
+    label: "Basic Info",
+    icon: <IconCheck />,
+    content: <BasicInfo />,
+    schema: basicInfoSchema,
+  },
   {
     id: 2,
     label: "Insurance",
     icon: <IconDotsCircleHorizontal />,
     content: <Insurance />,
+    schema: insuranceInfoSchema,
   },
   { id: 3, label: "Financials", icon: <IconCircle />, content: <Financials /> },
   {

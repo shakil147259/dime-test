@@ -14,10 +14,12 @@ import { enumToOptions } from "../../../../../utils";
 import { RootState } from "../../../../../app/store";
 import { insuranceUpdate, addBeneficiary } from "./store/insuranceSlice";
 import { PAYMENT_FREQUENCY, POLICY_TYPE } from "./store/types";
+import { useFormContext } from "react-hook-form";
 
 export const Insurance = () => {
   const state = useSelector((state: RootState) => state.insuranceInfo);
   const dispatch = useDispatch();
+  const { register, formState } = useFormContext();
 
   const addBeneficiaries = () => {
     const index = state.beneFiciaries.length;
@@ -28,6 +30,7 @@ export const Insurance = () => {
     <div className="policy my-10 flex flex-col gap-8">
       <div className="flex flex-row gap-2">
         <Input
+          {...register("policyNumber")}
           label="Policy Number"
           labelOutlined
           value={state.policyNumber}
@@ -35,6 +38,7 @@ export const Insurance = () => {
             const { value } = e.target;
             dispatch(insuranceUpdate({ key: "policyNumber", value }));
           }}
+          error={formState.errors.policyNumber?.message?.toString()}
         />
 
         <Select

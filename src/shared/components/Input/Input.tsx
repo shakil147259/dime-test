@@ -5,10 +5,10 @@ import { forwardRef } from "react";
 import { Props } from "./utils/types";
 
 export const Input = forwardRef(function Input(
-  { labelOutlined = false, label, onChange, rightIcon, ...rest }: Props,
+  { labelOutlined = false, label, onChange, rightIcon, error, ...rest }: Props,
   ref: React.Ref<HTMLInputElement>
 ) {
-  const styles = getStyles({ labelOutlined });
+  const styles = getStyles({ labelOutlined, error });
 
   return (
     <div className={styles.container}>
@@ -30,6 +30,7 @@ export const Input = forwardRef(function Input(
       <label htmlFor="outline" className={twMerge(styles.label)}>
         {label}
       </label>
+      {error && <span className="text-red-500 text-xs mt-1">{error}</span>}
     </div>
   );
 });

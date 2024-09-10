@@ -17,15 +17,19 @@ import {
   ServicePreferenceEnum,
 } from "./store/types";
 import { enumToOptions } from "../../../../../utils";
+import { useFormContext } from "react-hook-form";
 
 export const BasicInfo = () => {
   const state = useSelector((state: RootState) => state.basicInfo);
   const dispatch = useDispatch();
 
+  const { register, formState } = useFormContext();
+
   const personalInfoSection = (
     <div className="info my-10 flex flex-col gap-8">
       <div className="flex flex-row gap-2">
         <Input
+          {...register("firstName")}
           label="First Name"
           labelOutlined
           value={state.firstName}
@@ -33,6 +37,7 @@ export const BasicInfo = () => {
             const { value } = e.target;
             dispatch(basicInfoUpdate({ key: "firstName", value }));
           }}
+          error={formState.errors.firstName?.message?.toString()}
         />
         <Input
           label="Last Name"
@@ -104,6 +109,7 @@ export const BasicInfo = () => {
         />
 
         <Input
+          {...register("emailAddress")}
           label="Email Address"
           labelOutlined
           value={state.emailAddress}
@@ -111,6 +117,7 @@ export const BasicInfo = () => {
             const { value } = e.target;
             dispatch(basicInfoUpdate({ key: "emailAddress", value }));
           }}
+          error={formState.errors.emailAddress?.message?.toString()}
         />
         <Input
           label="Phone Number"
