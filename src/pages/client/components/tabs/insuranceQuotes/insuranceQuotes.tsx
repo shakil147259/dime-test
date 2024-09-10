@@ -39,14 +39,6 @@ export const InsuranceQuotes = () => {
       <Label as="h2">Notes</Label>
       <Divider />
       {notesSection}
-
-      {/* <Label as="h2">Folllow-Up Dates</Label>
-      <Divider />
-      {followUpDatesSection}
-
-      <Label as="h2">Service Requests</Label>
-      <Divider />
-      {serviceRequestsSection} */}
     </>
   );
 };
